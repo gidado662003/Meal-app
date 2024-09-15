@@ -1,0 +1,74 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Playfair+Display:wght@400;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Playwrite+CU:wght@100..400&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.nav-list {
+  @apply p-1 mb-3;
+}
+.nav-list:hover a {
+  @apply text-primary;
+}
+.card {
+  @apply rounded-md overflow-hidden bg-white shadow-lg relative cursor-pointer transition-all;
+  width: 100%;
+  height: 260px;
+  transform-style: preserve-3d;
+  transform: perspective(100px);
+}
+
+.card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: transform 0.8s ease-in-out;
+}
+
+.card:hover .card-inner {
+  transform: rotateY(180deg);
+}
+
+.card-face {
+  @apply absolute inset-0;
+  backface-visibility: hidden;
+}
+
+.front {
+  @apply bg-white;
+  z-index: 2;
+}
+.back {
+  @apply text-green-600 flex items-center justify-center;
+  transform: rotateY(180deg);
+  background: linear-gradient(135deg, #d9534f, #f4b542);
+  color: #ffffff;
+}
+.timer {
+  @apply bg-secondary-200 text-black text-xs uppercase font-bold rounded-full p-2 absolute top-1 left-0  cursor-pointer ml-1 mt-1 transition-all;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+.card:hover .timer {
+  transform: scale(0.6);
+}
+.front img {
+  @apply w-full object-cover;
+  height: 73%;
+}
+.kk {
+  background: #f1a966b3;
+  background-color: #ffebcde6;
+}
+@layer base {
+  :root {
+    --radius: 0.5rem;
+  }
+}
