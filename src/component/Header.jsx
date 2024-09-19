@@ -181,6 +181,7 @@ export default function Header() {
             <Link
               to="/"
               className="text-white text-lg font-semibold hover:text-red-300 transition-all duration-300"
+              onClick={() => setToggle(!toggle)}
             >
               Home
             </Link>
@@ -190,7 +191,7 @@ export default function Header() {
             <Link
               to="/about"
               className="text-white text-lg font-semibold hover:text-red-300 transition-all duration-300"
-              onClick={() => setToggle(true)}
+              onClick={() => setToggle(!toggle)}
             >
               About Us
             </Link>
@@ -199,7 +200,7 @@ export default function Header() {
             <Link
               to="meal-planner"
               className="text-white text-lg font-semibold hover:text-red-300 transition-all duration-300"
-              onClick={() => setToggle(true)}
+              onClick={() => setToggle(!toggle)}
             >
               Menu Planner
             </Link>
@@ -208,7 +209,7 @@ export default function Header() {
             <Link
               to="/contact"
               className="text-white text-lg font-semibold hover:text-red-300 transition-all duration-300"
-              onClick={() => setToggle(true)}
+              onClick={() => setToggle(!toggle)}
             >
               Contact
             </Link>
