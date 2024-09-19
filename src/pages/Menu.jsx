@@ -55,7 +55,7 @@ export default function Menu() {
               type="text"
               name="food"
               placeholder="Search Your Food Recipe"
-              className=" w-[320px] rounded-[8px] p-2 border-[3px] indent-2"
+              className=" w-[320px] rounded-[8px] p-2 border-[3px] indent-2 mb-2"
               onChange={getInputData}
               onKeyUp={keyEnter}
             />
