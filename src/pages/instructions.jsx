@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 
 export default function Instructions() {
   const [data, setdData] = useState(null);
+  const [loading, setLoading] = useState(true); // New loading state
   const [Ingredients, setIngredients] = useState(true);
   const [Instructions, setInstructions] = useState(false);
   const [favourites, setFavourites] = useState([
@@ -33,14 +34,15 @@ export default function Instructions() {
         const response = await fetch(url);
         const data = await response.json();
         setdData(data);
+        setLoading(false); // Set loading to false once data is fetched
 
         let tempFav = localStorage.getItem("favorites");
         if (tempFav) {
-          console.log({ tempFav: JSON.parse(tempFav) });
           setFavourites(JSON.parse(tempFav));
         }
       } catch (error) {
         console.log("response error", error);
+        setLoading(false); // Also stop loading if an error occurs
       }
     }
     fetchData();
@@ -60,17 +62,18 @@ export default function Instructions() {
         name: meal.strMeal,
         image: meal.strMealThumb,
       });
-      console.log(meal);
     }
-    console.log({ newFavourites });
-    console.log(foundIndex);
     setFavourites(newFavourites);
     localStorage.setItem("favorites", JSON.stringify(newFavourites));
   }
 
   return (
     <>
-      {data !== null ? (
+      {loading ? (
+        <div className="flex justify-center items-center h-screen">
+          <div className="loader border-t-4 border-primary border-solid rounded-full w-16 h-16 animate-spin"></div>
+        </div>
+      ) : data !== null ? (
         data?.meals?.map((items, index) => (
           <div
             key={items.idMeal}
@@ -87,7 +90,7 @@ export default function Instructions() {
             </div>
 
             {/* Ingredients and Instructions Section */}
-            <div className="col-span-3  p-6 bg-white shadow-lg rounded-lg">
+            <div className="col-span-3 p-6 bg-white shadow-lg rounded-lg">
               <div className="flex justify-between text-center mb-6">
                 {/* Ingredients Button */}
                 <p
@@ -151,7 +154,18 @@ export default function Instructions() {
               {Instructions && (
                 <div className="font-serif text-lg text-gray-700 leading-7">
                   <h2 className="text-2xl font-semibold mb-4">Instructions:</h2>
-                  <p>{items.strInstructions}</p>
+                  <p>
+                    {items.strInstructions
+                      .split(".")
+                      .filter((step) => step.trim() !== "")
+                      .map((step, index) => {
+                        return (
+                          <p key={step} className="mb-4">
+                            step {index + 1}: {step}
+                          </p>
+                        );
+                      })}
+                  </p>
                 </div>
               )}
             </div>
